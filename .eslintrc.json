@@ -1,20 +1,40 @@
 {
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "webpack.*",
+    "config/paths.js"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
   "env": {
     "browser": true,
     "es6": true,
     "node": true,
     "commonjs": true
   },
-  "extends": "standard",
   "parserOptions": {
-    "ecmaVersion": 2015,
+    "ecmaVersion": 2021,
     "sourceType": "module"
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "config/webpack.common.js"
+      }
+    }
   },
   "rules": {
     "indent": [
       "error",
       2,
-      {"SwitchCase": 1
+      {
+        "SwitchCase": 1
       }
     ],
     "linebreak-style": [
@@ -31,7 +51,8 @@
     ],
     "space-before-function-paren": [
       "error",
-      "never"
-    ]
+      "always"
+    ],
+    "no-unused-vars": "warn"
   }
 }
