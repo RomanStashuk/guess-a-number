@@ -4,37 +4,14 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
 
-document.querySelector('.highscore');
+const checkBtn = document.querySelector('.btn--check');
+const restartBtn = document.querySelector('.btn--restart');
 
-document.querySelector('.btn--check').addEventListener('click', function () {
+function startGame() {
   const guessingNumber = Number(document.querySelector('.number__input').value);
 
   if (!guessingNumber) {
     document.querySelector('.results__message').textContent = 'Enter a number';
-  }
-
-  if (guessingNumber > secretNumber) {
-    if (score > 1) {
-      document.querySelector('.results__message').textContent = 'Too much!';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.results__message').textContent = 'Game Over!';
-      document.querySelector('.score').textContent = 0;
-      document.body.style.backgroundColor = 'rgb(238, 15, 15)';
-    }
-  }
-
-  if (guessingNumber < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.results__message').textContent = 'Not enough!';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.results__message').textContent = 'Game Over!';
-      document.querySelector('.score').textContent = 0;
-      document.body.style.backgroundColor = 'rgb(238, 15, 15)';
-    }
   }
 
   if (guessingNumber === secretNumber) {
@@ -47,8 +24,19 @@ document.querySelector('.btn--check').addEventListener('click', function () {
       highscore = score;
       document.querySelector('.highscore').textContent = highscore;
     }
+  } else if (guessingNumber !== secretNumber) {
+    if (score > 1) {
+      document.querySelector('.results__message').textContent =
+        guessingNumber > secretNumber ? 'Too much!' : 'Not enough';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.results__message').textContent = 'Game Over!';
+      document.querySelector('.score').textContent = 0;
+      document.body.style.backgroundColor = 'rgb(238, 15, 15)';
+    }
   }
-});
+}
 
 function restartGame() {
   document.querySelector('.results__message').textContent = 'Start guessing';
@@ -61,4 +49,5 @@ function restartGame() {
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 }
 
-document.querySelector('.btn--restart').addEventListener('click', restartGame);
+checkBtn.addEventListener('click', startGame);
+restartBtn.addEventListener('click', restartGame);
