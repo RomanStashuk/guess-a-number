@@ -51,7 +51,7 @@
     ],
     "space-before-function-paren": [
       "error",
-      "always"
+      "newer"
     ],
     "no-unused-vars": "warn"
   }
